@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import card1 from '../images/card1.jpg';
 import { useDispatchCart,useCart } from './ContextReducer';
 export default function Card(props) {
@@ -11,10 +11,13 @@ export default function Card(props) {
     const [qty,setQty] =useState(1);
     const [size,setSize] = useState("")
     const handleAddtoCart =async()=>{
-        await dispatch({type :"ADD",id:props.foodItem._id,name : props.foodItem.name,price:props.foodItem.price,qty:qty,size:size})
+        await dispatch({type :"ADD",id:props.foodItem._id,name : props.foodItem.name,price:finalprice,qty:qty,size:size})
         console.log(data)
     }
     let finalprice=qty*parseInt(options[size]);
+    useEffect(()=>{
+        setSize(priceRef.current.value)
+    },[])
     return (
         <div>
             <div className="card m-3" style={{ width: "18rem", maxHeight: "360px", display: "flex", flexDirection: "column" }}>
