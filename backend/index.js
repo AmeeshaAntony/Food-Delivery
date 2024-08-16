@@ -16,9 +16,11 @@ app.use(express.json()); // Middleware to parse JSON bodies
 app.get('/', (req, res) => { // Route to check if server is running
     res.send("Hello");
 });
-
+const orderRoutes = require('./Routes/OrderData');
 app.use('/api', require('./Routes/CreateUser'));
 app.use('/api', require('./Routes/DisplayData'));
+app.use('/api', require('./Routes/OrderData'));
+app.use('/api', orderRoutes);
 
 // Start the server
 app.listen(3000, () => {
